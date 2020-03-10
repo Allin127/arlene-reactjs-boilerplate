@@ -22,9 +22,25 @@ module.exports = {
   module: {
     rules: [{
       test: /\.jsx?$/,
-      include: [path.resolve(__dirname, 'src')],
-      loader: 'babel-loader',
-      exclude: '/node_modules/'
+      use: [{
+        loader: 'babel-loader',
+        options: {
+          "presets": [
+            [
+              "@babel/preset-env",
+              {
+                "loose": true,
+                "modules": false,
+                "targets": {
+                  "browsers": "last 2 chrome versions"
+                }
+              }
+            ],
+            "@babel/preset-react"
+          ],
+          "plugins": ["react-hot-loader/babel",['@babel/plugin-proposal-decorators', { legacy: true }],["@babel/plugin-proposal-class-properties", { loose: true }]]
+        }
+    }],
     },
     {
       test: /\.css$/,
@@ -37,7 +53,22 @@ module.exports = {
           }
         }
       ]
-    }]
+    },
+    {
+      test: /\.(png|jpg|gif)$/,
+      use: [
+        {
+          loader: 'url-loader',
+          options: {
+            limit: 1,
+            name:'[name].[hash].[ext]',
+            esModule: false
+          },
+        },
+      ],
+    },
+  
+  ]
   },
   plugins: [new webpack.NamedModulesPlugin(), new HtmlWebpackPlugin({
         template:  './template.html',
@@ -51,7 +82,13 @@ module.exports = {
   resolve: {
     alias: {
       'react-dom': '@hot-loader/react-dom',
+      'ALBase': path.resolve(__dirname, 'node_modules/h5-lib-base/src/index'),
+      'ALUI-WEB': path.resolve(__dirname, 'node_modules/h5-lib-ui/src/web/index'),
+      'ALUI-LFE': 'h5-lib-ui/src/lfe',
+      'react-native': 'react-native-web',
+      '@react-navigation': path.resolve(__dirname, 'node_modules/h5-lib-ui/src/lfe/router')
     },
+    extensions:['.web.js','.js','.jsx']
   }
   
 };
