@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Button, Image, requireNativeComponent } from 'react-native'
-
-import { RouterHelper } from './RouterHelper'
+import { RouterHelper } from 'ALUI-LFE/router/RouterHelper'
 
 
 

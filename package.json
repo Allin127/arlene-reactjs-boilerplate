@@ -30,7 +30,7 @@
     "prettier": "^1.13.5",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
-    "react-hot-loader": "^4.12.19",
+    
     "react-native-web": "^0.12.2",
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.1.2",
