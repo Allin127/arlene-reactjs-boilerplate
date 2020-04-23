@@ -18,7 +18,7 @@ module.exports = {
       app.use(express.static(path.resolve(process.cwd(), './assets')));
     }
   },
-  entry: ['./src/index'],
+  entry: ['./src/simple/index','./src/router-sample/index'],
   module: {
     rules: [{
       test: /\.jsx?$/,
@@ -67,14 +67,26 @@ module.exports = {
         },
       ],
     },
-
+    {
+      test: /\.ttf$/,
+      use: [
+        {
+          loader: 'url-loader',
+          options: {
+            limit: 1,
+            name: '[name].[hash].[ext]',
+            esModule: false
+          },
+        },
+      ],
+    },
     ]
   },
   plugins: [new webpack.NamedModulesPlugin(),
-      new webpack.DefinePlugin({
-        '__IS_WEB__': true
-      }),
-     new HtmlWebpackPlugin({
+  new webpack.DefinePlugin({
+    '__IS_WEB__': true
+  }),
+  new HtmlWebpackPlugin({
     template: './template.html',
     filename: 'index.html'
   }), new webpack.NamedModulesPlugin()],
@@ -85,6 +97,7 @@ module.exports = {
   },
   resolve: {
     alias: {
+      '@':path.resolve(__dirname, 'src'),
       'react-dom': '@hot-loader/react-dom',
       'ALBase': path.resolve(__dirname, 'node_modules/h5-lib-base/src/index'),
       'ALUI-WEB': path.resolve(__dirname, 'node_modules/h5-lib-ui/src/web/index'),
@@ -94,5 +107,5 @@ module.exports = {
     },
     extensions: ['.web.js', '.js', '.jsx']
   }
-  
+
 };

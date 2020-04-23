@@ -7,7 +7,7 @@ import SubFirst from './pages/subpage/SubFirst'
 import SubSecond from './pages/subpage/SubSecond'
 import SubThird from './pages/subpage/SubThird'
 import './index.css';
-import { BrowserRouter, Route, Switch, Link,Redirect } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom'
 import { matchRoutes, renderRoutes } from "react-router-config";
 import { ALTouchable as Touchable, ALNavigationBar as NavigationBar } from 'ALUI-WEB'
 import { View, Text, Button } from 'react-native-web'
@@ -89,33 +89,33 @@ class App extends Component {
                         </li>
                         <li>
                             <Link to="/third">Third</Link>
-                            
+
                         </li>
                     </ul>
                     <Switch>
-                    <Redirect from="/" to="/first"></Redirect>
-                    
-                    {routes.map((route, i) => (
-                        <RouteWithSubRoutes key={i} {...route} />
-                    ))}
-                    
+                        <Redirect from="/" to="/first"></Redirect>
+
+                        {routes.map((route, i) => (
+                            <RouteWithSubRoutes key={i} {...route} />
+                        ))}
+
                     </Switch>
-                    
+
                     {/* <BrowserRouter> */}
                     <Switch>
-                    <Redirect from="/first"  to="/second"></Redirect>
-                    {routes.map((route, i) => (
-                        <RouteWithSubRoutes key={i} {...route} />
-                    ))}
-                  
-                    
+                        <Redirect from="/first" to="/second"></Redirect>
+                        {routes.map((route, i) => (
+                            <RouteWithSubRoutes key={i} {...route} />
+                        ))}
+
+
                     </Switch>
-                    
+
                     {/* <Redirect to="/third"></Redirect> */}
                     {/* </BrowserRouter> */}
                     {/* </BrowserRouter> */}
                 </View>
-                
+
             </BrowserRouter>
 
         );
