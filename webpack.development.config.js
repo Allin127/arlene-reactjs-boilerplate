@@ -6,6 +6,7 @@ const express = require('express');
 module.exports = {
   mode: 'development',
   //https://webpack.js.org/configuration/dev-server/#devserver
+  devtool: 'cheap-module-eval-source-map',
   devServer: {
     host: "0.0.0.0",
     hot: true,
@@ -18,7 +19,8 @@ module.exports = {
       app.use(express.static(path.resolve(process.cwd(), './assets')));
     }
   },
-  entry: ['./src/simple/index','./src/router-sample/index','./src/website-layout/index'],
+  // entry: ['./src/simple/index','./src/router-sample/index','./src/website-layout/index'],
+  entry: ['./src/website-layout/index'],
   module: {
     rules: [{
       test: /\.jsx?$/,

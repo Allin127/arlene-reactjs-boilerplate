@@ -8,7 +8,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   mode: 'production',
-  entry: ['./src/simple/index','./src/router-sample/index','./src/website-layout/index'],
+  // entry: ['./src/simple/index','./src/router-sample/index','./src/website-layout/index'],
+  entry: ['./src/website-layout/index'],
   module: {
     rules: [{
       test: /\.jsx?$/,
