@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { HashRouter as Router, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Route, Link,Redirect,Switch} from "react-router-dom";
 import FirstPage from '@/common/pages/First';
 import SecondPage from '@/common/pages/Second';
 import ThridPage from '@/common/pages/Third';
@@ -16,7 +16,7 @@ export default class App extends PureComponent {
                 <div>
                     <ul>
                         <li>
-                            <Link to="/">First</Link>
+                            <Link to="/first">First</Link>
                         </li>
                         <li>
                             <Link to="/second">Second</Link>
@@ -26,13 +26,19 @@ export default class App extends PureComponent {
                         </li>
                     </ul>
                     <hr />
-                    <Route exact path="/" component={FirstPage} />
+                    
+                    <Route exact path="/first" component={FirstPage} />
                     <Route path="/second" component={SecondPage} />
                     <Route path="/third" component={ThridPage} />
                     <Route exact path="/third/first" component={SubFirst} />
                     <Route path="/third/second" component={SubSecond} />
                     <Route path="/third/third" component={SubThird} />
+                    
                 </div>
+                <Redirect from="/" to="/first"></Redirect>
+                <Switch>
+                    <Redirect from="/" to="/first"></Redirect>
+                </Switch>
             </Router>
         )
     }

@@ -1,0 +1,15 @@
+
+.site-layout .site-layout-background {
+    background: #fff;
+}
+
+[data-theme="dark"] .site-layout .site-layout-background {
+    background: #333333;
+}
+
+.logo{
+    background: url(../../assets/logo-hor.png) no-repeat center center ;
+    background-size:contain;
+    height:50px;
+    margin:10px 0;
+}
