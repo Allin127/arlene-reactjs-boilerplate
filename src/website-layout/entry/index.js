@@ -8,7 +8,8 @@ import SubSecond from '@/common/pages/subpage/SubSecond';
 import SubThird from '@/common/pages/subpage/SubThird';
 import LongPage from '@/common/pages/LongPage';
 
-import 'antd/dist/antd.css';
+// babel-import 优化过了就不需要引入
+// import 'antd/dist/antd.css'; 
 import './index.css';
 
 import { Layout, Menu } from 'antd';
