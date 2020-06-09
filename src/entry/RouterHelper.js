@@ -1,5 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import React from 'react';
+import React from '../common/pages/node_modules/react';
 import { NavigationContainer } from '@react-navigation/native';
 const RouterHelper = {
     setTitle: function (target,title) {

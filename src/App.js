@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-import First from './pages/First'
-import Second from './pages/Second'
-import Third from './pages/Third'
-import SubFirst from './pages/subpage/SubFirst'
-import SubSecond from './pages/subpage/SubSecond'
-import SubThird from './pages/subpage/SubThird'
+import First from './common/pages/First'
+import Second from './common/pages/Second'
+import Third from './common/pages/Third'
+import SubFirst from './common/pages/subpage/SubFirst'
+import SubSecond from './common/pages/subpage/SubSecond'
+import SubThird from './common/pages/subpage/SubThird'
 import './index.css';
 import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom'
 import { matchRoutes, renderRoutes } from "react-router-config";
@@ -89,7 +89,6 @@ class App extends Component {
                         </li>
                         <li>
                             <Link to="/third">Third</Link>
-
                         </li>
                     </ul>
                     <Switch>

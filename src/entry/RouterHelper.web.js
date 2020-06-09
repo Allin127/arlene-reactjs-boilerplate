@@ -1,5 +1,5 @@
 import {BrowserRouter, Switch,Route, Redirect } from 'react-router-dom'
-import React from 'react';
+import React from '../common/pages/node_modules/react';
 import {ALPage} from 'ALUI-WEB'
 const RouterHelper = {
     setTitle: function (target, title) {
