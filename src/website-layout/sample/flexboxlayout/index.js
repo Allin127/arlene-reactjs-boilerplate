@@ -207,10 +207,6 @@ export default class FlexBoxLayoutSample extends PureComponent {
                 flexChildStyle={curr.flexChildStyle}
                 selected={!!curr.selected}
                 onClick={(e) => {
-                    if (this.state.controlAllChildren) {
-                        e.stopPropagation();
-                        return;
-                    }
                     curr.selected = true;
                     if (this.state.lastSelectChild >= 0 && this.state.lastSelectChild != index) {
                         this.state.childNodes[this.state.lastSelectChild].selected = false;
@@ -228,7 +224,11 @@ export default class FlexBoxLayoutSample extends PureComponent {
         if (type == "controlAll") { //是否控制所有children
             this.setState({ controlAllChildren: checked });
             if (checked) {
-                this.setState({ lastSelectChild: -1 });
+                //resetChildren
+                if (this.state.lastSelectChild >= 0) {
+                    this.state.childNodes[this.state.lastSelectChild].selected = false;
+                }
+                this.setState({  lastSelectChild: -1, "childNodes": [...this.state.childNodes] });
             }
         }
     }
