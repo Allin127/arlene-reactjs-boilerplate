@@ -40,6 +40,7 @@ export default class FlexBoxLayoutSample extends PureComponent {
 
 
     proxyChildFlexStyleState = (key, value) => {
+
         if (this.state.controlAllChildren) {
             let arr = this.state.childNodes.reduce((prev, curr) => {
                 curr.flexChildStyle[key] = value;
@@ -54,6 +55,15 @@ export default class FlexBoxLayoutSample extends PureComponent {
         }
     }
 
+    formatValue = (value)=>{
+        if(isFinite(value)&&value!==""){
+            console.log("number");
+            if(value>150) return 150;
+            else return parseInt(value);
+        }else{
+            return value;
+        }
+    }
 
     renderSizeInput = () => {
         let mFlexChildStyle;
@@ -71,11 +81,11 @@ export default class FlexBoxLayoutSample extends PureComponent {
                 <div className="flex-1" style={{ "display": "flex" }}>
                     <div className="flex-1" style={{ "display": "flex", flexDirection: "column" }}>
                         <h4 style={{ verticalAlign: "middle", margin: 0, flex: 1, lineHeight: "32px" }}>宽</h4>
-                        <Input value={width} maxLength={3} onChange={(e) => { this.proxyChildFlexStyleState("width", e.target.value > 150 ? 150 : parseInt(e.target.value)) }} style={{ width: 70 }} />
+                        <Input value={width} maxLength={4} onChange={(e) => { this.proxyChildFlexStyleState("width",this.formatValue(e.target.value)) }} style={{ width: 70 }} />
                     </div>
                     <div className="flex-1" style={{ "display": "flex", flexDirection: "column" }}>
                         <h4 style={{ verticalAlign: "middle", margin: 0, flex: 1, lineHeight: "32px" }}>高</h4>
-                        <Input value={height} maxLength={3} onChange={(e) => { this.proxyChildFlexStyleState("height", e.target.value > 150 ? 150 : parseInt(e.target.value)) }} style={{ width: 70 }} />
+                        <Input value={height} maxLength={4} onChange={(e) => { this.proxyChildFlexStyleState("height", this.formatValue(e.target.value))}} style={{ width: 70 }} />
                     </div>
                 </div>
                 <div className="flex-1" style={{ "display": "flex" }}>
@@ -99,9 +109,24 @@ export default class FlexBoxLayoutSample extends PureComponent {
 
 
                         <Input value={flexBasis} maxLength={4} onChange={(e) => {
-                            this.proxyChildFlexStyleState("flexBasis", e.target.value <= 150 ? parseInt(e.target.value) : "auto");
+                            this.proxyChildFlexStyleState("flexBasis", this.formatValue(e.target.value));
                         }} style={{ width: 70 }} />
 
+                    </div>
+                </div>
+                <div className="flex-1" style={{ "display": "flex" }}>
+                    <div className="flex-1" style={{ "display": "flex", flexDirection: "column" }}>
+                        <h4 style={{ verticalAlign: "middle", margin: 0, flex: 1, lineHeight: "32px" }}>alignSelf</h4>
+                        <Select defaultValue="center" value={this.state.alignSelf} style={{ flex: 1 }} onChange={(value) => {
+                            this.proxyChildFlexStyleState("alignSelf", value);
+                        }}>
+                              <Option value="center">center</Option>
+                            <Option value="flex-start">flex-start</Option>
+                            <Option value="flex-end">flex-end</Option>
+                            <Option value="baseline">baseline</Option>
+                            <Option value="stretch">stretch</Option>
+
+                        </Select>
                     </div>
                 </div>
                 <div className="flex-1" style={{ "display": "flex", flexDirection: "row",marginTop:20 }}>
@@ -111,7 +136,6 @@ export default class FlexBoxLayoutSample extends PureComponent {
                             onChange={(checked) => { this.onSwitchChanged("controlAll", checked) }} >
                         </Switch>
                     </div>
-
                 </div>
             </>
         )
