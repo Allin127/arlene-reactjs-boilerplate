@@ -8,11 +8,13 @@ import SubSecond from '@/common/pages/subpage/SubSecond';
 import SubThird from '@/common/pages/subpage/SubThird';
 import LongPage from '@/common/pages/LongPage';
 import NoMatch from '../NoMatch'
+import FlexBoxLayoutSample from '../../sample/flexboxlayout'
 export default class extends PureComponent {
 
     render() {
         return (
             <Switch>
+                <Route path="/layout/flex-box" component={FlexBoxLayoutSample} />
                 <Route path="/third/first" component={SubFirst} />
                 <Route path="/third/second" component={SubSecond} />
                 <Route path="/third/third" component={SubThird} />

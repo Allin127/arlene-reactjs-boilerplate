@@ -8,10 +8,16 @@ import {
     UserOutlined,
     UploadOutlined,
     VideoCameraOutlined,
+    Html5Outlined
 } from '@ant-design/icons';
 
 
 export const SubMenuConfig = [
+    {
+        name: 'FlexBoxLayout',
+        path: '/layout/flex-box',
+        icon: <Html5Outlined/>
+    },
     {
         name: 'First',
         path: '/first',

@@ -8,8 +8,8 @@ import {
     UserOutlined,
     UploadOutlined,
     VideoCameraOutlined,
+    Html5Outlined,
 } from '@ant-design/icons';
-
 
 export const Menus = [
     {

@@ -22,8 +22,8 @@ export default class Entry extends Component {
                     <Aside/>
                     <Layout className="site-layout" style={{ marginLeft: 200 }}>
                         {/* <Header className="site-layout-background" style={{ padding: 0 }} /> */}
-                        <Content style={{ margin: '24px 16px 0', overflow: 'scroll' }}>
-                            <div className="site-layout-background" style={{ padding: 24, textAlign: 'center' }}>
+                        <Content style={{ margin: '24px 16px 0', overflow: 'scroll',height:"100%" }}>
+                            <div className="site-layout-background" style={{ padding: 24,height:"100%" }}>
                             <MainContent/>
                             </div>
                         </Content>

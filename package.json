@@ -21,6 +21,7 @@
   "dependencies": {
     "antd": "^4.1.4",
     "chalk": "^2.4.1",
+    "classnames": "^2.2.6",
     "commander": "^2.15.1",
     "cross-spawn": "^6.0.5",
     "dargs": "^6.0.0",
