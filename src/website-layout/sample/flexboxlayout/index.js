@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react'
-import { Card, Input, Select, Switch, Button } from 'antd';
+import { Card, Modal, Input, Select, Switch, Button } from 'antd';
 const { Option } = Select;
+import { EventEmitter } from 'events'
+ 
 import "@/common/styles/container.css"
 import "./index.css"
 
@@ -24,6 +26,19 @@ export default class FlexBoxLayoutSample extends PureComponent {
 
     constructor(props) {
         super(props);
+
+        this.eventEmitter = new EventEmitter();
+        
+        this.eventEmitter.on('css-collect-callback',(cssJson,className)=>{
+            
+            let text = JSON.stringify(cssJson,null,'<p>');
+            text=`.${className}<p>`+text;
+            text = text.replace("}","<p>}")
+            this.tempCssTextOutput = "<p><p>"+this.tempCssTextOutput+"<p><p>"+text;
+            this.setState({cssTextOutput:this.tempCssTextOutput});
+            
+            
+        });
         this.state = {
             childNodes: [this.createEmptyChild(), this.createEmptyChild(), this.createEmptyChild()],
             parentStyle: {
@@ -32,15 +47,16 @@ export default class FlexBoxLayoutSample extends PureComponent {
                 justifyContent: "center",
                 flexDirection: "row",
             },
+            codePanelVisible:false,
             controlAllChildren: false,
-            lastSelectChild: -1
+            lastSelectChild: -1,
+            cssTextOutput:""
         }
     }
 
 
 
     proxyChildFlexStyleState = (key, value) => {
-
         if (this.state.controlAllChildren) {
             let arr = this.state.childNodes.reduce((prev, curr) => {
                 curr.flexChildStyle[key] = value;
@@ -55,12 +71,11 @@ export default class FlexBoxLayoutSample extends PureComponent {
         }
     }
 
-    formatValue = (value)=>{
-        if(isFinite(value)&&value!==""){
-            console.log("number");
-            if(value>150) return 150;
+    formatValue = (value) => {
+        if (isFinite(value) && value !== "") {
+            if (value > 150) return 150;
             else return parseInt(value);
-        }else{
+        } else {
             return value;
         }
     }
@@ -81,11 +96,11 @@ export default class FlexBoxLayoutSample extends PureComponent {
                 <div className="flex-1" style={{ "display": "flex" }}>
                     <div className="flex-1" style={{ "display": "flex", flexDirection: "column" }}>
                         <h4 style={{ verticalAlign: "middle", margin: 0, flex: 1, lineHeight: "32px" }}>宽</h4>
-                        <Input value={width} maxLength={4} onChange={(e) => { this.proxyChildFlexStyleState("width",this.formatValue(e.target.value)) }} style={{ width: 70 }} />
+                        <Input value={width} maxLength={4} onChange={(e) => { this.proxyChildFlexStyleState("width", this.formatValue(e.target.value)) }} style={{ width: 70 }} />
                     </div>
                     <div className="flex-1" style={{ "display": "flex", flexDirection: "column" }}>
                         <h4 style={{ verticalAlign: "middle", margin: 0, flex: 1, lineHeight: "32px" }}>高</h4>
-                        <Input value={height} maxLength={4} onChange={(e) => { this.proxyChildFlexStyleState("height", this.formatValue(e.target.value))}} style={{ width: 70 }} />
+                        <Input value={height} maxLength={4} onChange={(e) => { this.proxyChildFlexStyleState("height", this.formatValue(e.target.value)) }} style={{ width: 70 }} />
                     </div>
                 </div>
                 <div className="flex-1" style={{ "display": "flex" }}>
@@ -120,7 +135,7 @@ export default class FlexBoxLayoutSample extends PureComponent {
                         <Select defaultValue="center" value={this.state.alignSelf} style={{ flex: 1 }} onChange={(value) => {
                             this.proxyChildFlexStyleState("alignSelf", value);
                         }}>
-                              <Option value="center">center</Option>
+                            <Option value="center">center</Option>
                             <Option value="flex-start">flex-start</Option>
                             <Option value="flex-end">flex-end</Option>
                             <Option value="baseline">baseline</Option>
@@ -129,10 +144,10 @@ export default class FlexBoxLayoutSample extends PureComponent {
                         </Select>
                     </div>
                 </div>
-                <div className="flex-1" style={{ "display": "flex", flexDirection: "row",marginTop:20 }}>
-                    <h4 style={{ display: "inline-block", margin: 0, marginRight: 20}}>同步配置</h4>
-                    <div style={{ height:32}}>
-                        <Switch  defaultChecked={this.state.controlAllChildren} checked={this.state.controlAllChildren}
+                <div className="flex-1" style={{ "display": "flex", flexDirection: "row", marginTop: 20 }}>
+                    <h4 style={{ display: "inline-block", margin: 0, marginRight: 20 }}>同步配置</h4>
+                    <div style={{ height: 32 }}>
+                        <Switch defaultChecked={this.state.controlAllChildren} checked={this.state.controlAllChildren}
                             onChange={(checked) => { this.onSwitchChanged("controlAll", checked) }} >
                         </Switch>
                     </div>
@@ -206,6 +221,7 @@ export default class FlexBoxLayoutSample extends PureComponent {
                             <Option value="flex-end">flex-end</Option>
                             <Option value="space-between">space-between</Option>
                             <Option value="space-around">space-around</Option>
+                            <Option value="space-evenly">space-evenly</Option>
                         </Select>
                     </div>
                 </div>
@@ -230,6 +246,7 @@ export default class FlexBoxLayoutSample extends PureComponent {
             prev.push(<Node key={index} _idx={index + 1}
                 flexChildStyle={curr.flexChildStyle}
                 selected={!!curr.selected}
+                eventEmitter={this.eventEmitter}
                 onClick={(e) => {
                     curr.selected = true;
                     if (this.state.lastSelectChild >= 0 && this.state.lastSelectChild != index) {
@@ -252,7 +269,7 @@ export default class FlexBoxLayoutSample extends PureComponent {
                 if (this.state.lastSelectChild >= 0) {
                     this.state.childNodes[this.state.lastSelectChild].selected = false;
                 }
-                this.setState({  lastSelectChild: -1, "childNodes": [...this.state.childNodes] });
+                this.setState({ lastSelectChild: -1, "childNodes": [...this.state.childNodes] });
             }
         }
     }
@@ -276,17 +293,17 @@ export default class FlexBoxLayoutSample extends PureComponent {
         )
     }
 
-    removeChild = ()=>{
-        if(this.state.lastSelectChild>=0&&!this.state.isParentSelected){
-            this.state.childNodes.splice(this.state.lastSelectChild,1);
-            this.setState({childNodes:[...this.state.childNodes],lastSelectChild:-1});
-            
+    removeChild = () => {
+        if (this.state.lastSelectChild >= 0 && !this.state.isParentSelected) {
+            this.state.childNodes.splice(this.state.lastSelectChild, 1);
+            this.setState({ childNodes: [...this.state.childNodes], lastSelectChild: -1 });
+
         }
     }
 
     appendChild = () => {
         this.state.childNodes.push(this.createEmptyChild());
-        this.setState({childNodes:[...this.state.childNodes]});
+        this.setState({ childNodes: [...this.state.childNodes] });
     }
 
 
@@ -294,20 +311,41 @@ export default class FlexBoxLayoutSample extends PureComponent {
         let nodes = this.renderChildNodes();
         return (
             <div className="playground" style={{ display: "flex", height: "100%", padding: 10 }}>
-                <Card className="card-container" style={{ width: 300, height: "100%" }}>
-                    <h3>基础参数</h3>
+                <Card title="基础参数" className="card-container" style={{ width: 300, height: "100%" }}
+                    extra={
+                        <a onClick={() => {
+                            this.tempCssTextOutput = "";
+                            this.setState({cssTextOutput:this.tempCssTextOutput,codePanelVisible:true});
+                            this.eventEmitter.emit('css-collect');
+                        }}>导出代码</a>
+                    }>
                     {!this.state.isParentSelected && this.renderSizeInput()}
                     {this.state.isParentSelected && this.renderContainer()}
                     {this.renderControlButton()}
                 </Card>
                 <div className="flex-1 common-container" style={{ height: "100%" }}>
-                    <ParentNode selected={this.state.isParentSelected} flexStyle={this.state.parentStyle} onClick={() => {
-                        if (this.state.lastSelectChild >= 0) this.state.childNodes[this.state.lastSelectChild].selected = false;
-                        this.setState({ childNodes: [...this.state.childNodes], isParentSelected: true, lastSelectChild: -1 });
-                    }}>
+                    <ParentNode
+                        eventEmitter={this.eventEmitter}
+                        selected={this.state.isParentSelected}
+                        flexStyle={this.state.parentStyle}
+                        onClick={() => {
+                            if (this.state.lastSelectChild >= 0) this.state.childNodes[this.state.lastSelectChild].selected = false;
+                            this.setState({ childNodes: [...this.state.childNodes], isParentSelected: true, lastSelectChild: -1 });
+                        }}>
+                            
                         {nodes}
                     </ParentNode>
                 </div>
+                <Modal
+                    title="Basic Modal"
+                    cancelButtonProps={{style:{display:'none'}}}
+                    visible={this.state.codePanelVisible}
+                    onOk={()=>{this.setState({codePanelVisible:!this.state.codePanelVisible})}}
+                    onCancel={()=>{this.setState({codePanelVisible:!this.state.codePanelVisible})}}
+                    destroyOnClose={false}
+                >
+                   <div dangerouslySetInnerHTML={{__html:this.state.cssTextOutput}}></div>
+                </Modal>
             </div>
         )
     }

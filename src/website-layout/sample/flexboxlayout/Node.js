@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import './index.css'
 import classNames from 'classnames'
+
 export default class Node extends PureComponent {
     //默认的props
     static defaultProps = {
@@ -11,6 +12,10 @@ export default class Node extends PureComponent {
     }
     constructor(props) {
         super(props);
+        this.eventEmitter = this.props.eventEmitter;
+        this.eventEmitter.on("css-collect",()=>{
+            this.eventEmitter.emit("css-collect-callback",this._style,"child-"+this.props._idx)
+        })
     }
 
 
@@ -20,6 +25,7 @@ export default class Node extends PureComponent {
         if (style.flexBasis > 0) {
             style.flexBasis += "px";
         }
+        this._style=style;
         return (
             <div
                 style={style}
