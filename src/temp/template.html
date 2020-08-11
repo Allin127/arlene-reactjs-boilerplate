@@ -1,0 +1,50 @@
+<!doctype html>
+<html className="no-js" lang="">
+
+<head>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            -webkit-touch-callout: none;
+            /*系统默认菜单被禁用*/
+            -webkit-user-select: none;
+            /*webkit浏览器*/
+            -khtml-user-select: none;
+            /*早起浏览器*/
+            -moz-user-select: none;
+            /*火狐浏览器*/
+            -ms-user-select: none;
+            /*IE浏览器*/
+            user-select: none;
+            /*用户是否能够选中文本*/
+        }
+
+        .flex-container>div {
+            flex: 1;
+        }
+    </style>
+    <meta charSet="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0,user-scalable=no" />
+   
+<body>
+    <div id="root" class='flex-container'>
+        <div id="app"></div>
+    </div>
+    <input type="text" value="3333" id="id1"></input>
+    <input type="text" id="id2"></input>
+    <script>var mountNode = document.getElementById('root');</script>
+</body>
+<script src="index.js"></script>
+</html>
