@@ -20,7 +20,8 @@ module.exports = {
     }
   },
   // entry: ['./src/simple/index','./src/router-sample/index','./src/website-layout/index'],
-  entry: ['./src/website-layout/index'],
+  // entry: ['./src/website-layout/index'],
+  entry: ['./src/miniprogramm/index'],
   module: {
     rules: [{
       test: /\.jsx?$/,
@@ -100,7 +101,7 @@ module.exports = {
   resolve: {
     alias: {
       '@':path.resolve(__dirname, 'src'),
-      'react-dom': '@hot-loader/react-dom',
+      'react-dom': '@hot-loader/react-dom'
       // 'ALBase': path.resolve(__dirname, 'node_modules/h5-lib-base/src/index'),
       // 'ALUI-WEB': path.resolve(__dirname, 'node_modules/h5-lib-ui/src/web/index'),
       // 'ALUI-LFE': path.resolve(__dirname, 'node_modules/h5-lib-ui/src/lfe'),

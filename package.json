@@ -6,6 +6,8 @@
   "scripts": {
     "start": "cross-env __IS_WEB__=1 webpack-dev-server --hot --config webpack.development.config.js",
     "build": "cross-env __IS_WEB__=1 webpack --config webpack.production.config.js",
+    "build:common": "cross-env __IS_WEB__=1 webpack --config webpack.production.common.config.js",
+    "build:test": "cross-env __IS_WEB__=1 webpack --config webpack.production.test.config.js",
     "sync": "rsync -avP --exclude-from='rsync-exclude.list' /Users/fengc16/workspace/arlene/arleneH5/arlene-pfe ./"
   },
   "repository": {
@@ -43,6 +45,7 @@
     "redux-logger": "^3.0.6",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
+    "snabbdom": "^1.0.1",
     "yeoman-generator": "^2.0.5"
   },
   "devDependencies": {

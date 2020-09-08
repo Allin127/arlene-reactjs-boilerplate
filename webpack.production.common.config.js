@@ -9,7 +9,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 module.exports = {
   mode: 'production',
   // entry: ['./src/simple/index','./src/router-sample/index','./src/website-layout/index'],
-  entry: ['./src/miniprogramm/index'],
+  entry: ['./src/miniprogramm/framework'],
   module: {
     rules: [{
       test: /\.jsx?$/,
@@ -74,7 +74,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css'
@@ -87,40 +87,13 @@ module.exports = {
       filename: 'index.html'
     }), new webpack.NamedModulesPlugin()],
   output: {
-    filename: '[name].[hash].js',
-    chunkFilename: '[name].[hash].js',
-    path: path.resolve(__dirname, 'dist')
-  },
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        vendors: {
-          test: /node_modules/,
-          name: 'vendors',
-          chunks: 'initial',
-          priority: 1,
-          minChunks: 1
-        },
-        echarts: {
-          test: /(echarts|zrender)/,
-          name: 'echarts',
-          chunks: 'initial',
-          priority: 2,
-          minChunks: 1
-        }
-      }
-    }
+    filename: 'index.js',
+    library: 'snb',
+    libraryTarget: 'umd',
+    umdNamedDefine: true,
+    path: path.resolve(__dirname, 'node_modules/snb')
   },
   resolve: {
-    alias: {
-      '@':path.resolve(__dirname, 'src'),
-      // 'react-dom': '@hot-loader/react-dom',
-      // 'ALBase': path.resolve(__dirname, 'node_modules/h5-lib-base/src/index'),
-      // 'ALUI-WEB': path.resolve(__dirname, 'node_modules/h5-lib-ui/src/web/index'),
-      // 'ALUI-LFE': path.resolve(__dirname, 'node_modules/h5-lib-ui/src/lfe'),
-      // 'react-native': 'react-native-web',
-      // '@react-navigation': path.resolve(__dirname, 'node_modules/h5-lib-ui/src/lfe/router')
-    },
     extensions: ['.web.js', '.js', '.jsx']
   }
 };
