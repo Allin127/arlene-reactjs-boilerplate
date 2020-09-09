@@ -1,5 +1,5 @@
 import Dep, {pushTarget, popTarget} from './dep'
-import { parsePath } from '../../fmk/Core/Util/lang'
+import { parsePath } from '../util/lang'
 
 let uid = 0
 
@@ -16,7 +16,7 @@ export default function Watcher(vm, expOrFn, cb, options) {
     this.user = this.lazy = false
   }
 
-  this.dirty = this.lazy // 用于渲染时不把计算watcher设置成Dep.target
+  this.dirty = this.lazy // 用于渲染时(update)，初始化时不把计算watcher设置成Dep.target
   this.getter = typeof expOrFn === 'function' ? expOrFn : parsePath(expOrFn);
 
   this.value = this.lazy ? undefined :this.get(); 

@@ -1,7 +1,6 @@
-import { h } from 'snabbdom'
-import { noop, } from '../../fmk/Core/util/index'
+import { noop} from '../util/index'
 import Watcher from '../observer/watcher'
-import { patch } from 'web/runtime/patch'
+import {patch} from '../../index'
 
 export function mountComponent (vm, el) {
   vm.$el = el

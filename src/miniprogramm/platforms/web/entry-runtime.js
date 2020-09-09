@@ -1,3 +1,3 @@
-import Page from './runtime/index'
+import Vue from './runtime/index'
 
-export default Page
+export default Vue

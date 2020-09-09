@@ -1,4 +1,4 @@
-import { noop, isPlainObject, } from '../../fmk/Core/util/index'
+import { noop, isPlainObject } from '../util/index'
 import { observe } from '../observer'
 import Watcher from '../observer/watcher'
 import Dep from '../observer/dep'
@@ -13,30 +13,30 @@ const sharedPropertyDefinition = {
 
 const computedWatcherOptions = { lazy: true }
 
-
-export function proxy (target, sourceKey, key) {
-  sharedPropertyDefinition.get = function proxyGetter () {
+export function proxy(target, sourceKey, key) {
+  sharedPropertyDefinition.get = function proxyGetter() {
     return this[sourceKey][key]
   }
-  sharedPropertyDefinition.set = function proxySetter (val) {
+  sharedPropertyDefinition.set = function proxySetter(val) {
     this[sourceKey][key] = val
   }
   Object.defineProperty(target, key, sharedPropertyDefinition)
 }
 
-
-export function initState (vm) {
-  vm._watchers = []
-  const opts = vm.$options
+export function initState(vm) {
+  vm._watchers = [];
+  const opts = vm.$options;
   // if (opts.props) initProps(vm, opts.props)
-  if (opts.methods) initMethods(vm, opts.methods)
+  
+  // this.funcA 映射到this.methods
+  if (opts.methods) initMethods(vm, opts.methods);
   if (opts.data) {
-    initData(vm)
+    initData(vm);
   } else {
-    observe(vm._data = {}, true /* asRootData */)
+    observe(vm._data = {}, true /* asRootData */);
   }
-  if (opts.computed) initComputed(vm, opts.computed)
-  if (opts.watch) initWatch(vm, opts.watch)
+  if (opts.computed) initComputed(vm, opts.computed);
+  if (opts.watch) initWatch(vm, opts.watch);
 }
 
 /**
@@ -84,6 +84,7 @@ function defineComputed(target, key, userDef) {
     enumerable: true,
     configurable: true,
     get() {
+      debugger;
       const watcher = this._computedWatchers && this._computedWatchers[key]
       if (watcher) {
         if (watcher.dirty) {
@@ -100,6 +101,7 @@ function defineComputed(target, key, userDef) {
 }
 
 function initWatch(vm, watch) {
+  debugger;
   for (const key in watch) {
     const handler = watch[key]
     if (Array.isArray(handler)) {
@@ -112,7 +114,7 @@ function initWatch(vm, watch) {
   }
 }
 
-function createWatcher (vm, expOrFn, handler, options) {
+function createWatcher(vm, expOrFn, handler, options) {
   if (isPlainObject(handler)) {
     options = handler
     handler = handler.handler
@@ -123,8 +125,8 @@ function createWatcher (vm, expOrFn, handler, options) {
   return vm.$watch(expOrFn, handler, options)
 }
 
-export function stateMixin(Vue) {
-  Vue.prototype.$watch = function (expOrFn, cb, options) {
+export function stateMixin(Arl) {
+  Arl.prototype.$watch = function (expOrFn, cb, options) {
     const vm = this
     if (isPlainObject(cb)) {
       return createWatcher(vm, expOrFn, cb, options)

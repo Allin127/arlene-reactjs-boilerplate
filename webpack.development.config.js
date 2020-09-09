@@ -21,7 +21,7 @@ module.exports = {
   },
   // entry: ['./src/simple/index','./src/router-sample/index','./src/website-layout/index'],
   // entry: ['./src/website-layout/index'],
-  entry: ['./src/miniprogramm/index'],
+  entry: ['./src/miniprogramm/test'],
   module: {
     rules: [{
       test: /\.jsx?$/,

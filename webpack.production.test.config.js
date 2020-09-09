@@ -98,6 +98,6 @@ module.exports = {
     extensions: ['.web.js', '.js', '.jsx']
   },
   externals:{
-    'snb':'snb'
+    'arl':'arl'
   }
 };

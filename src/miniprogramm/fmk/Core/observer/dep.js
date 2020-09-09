@@ -4,8 +4,9 @@ export default function Dep() {
   this.id = ++uid // uid for batching
   this.subs = [];
   this.subIds = new Set();
-
 }
+
+//watcher回调，将watcher加入到sub中
 Dep.prototype.addSub = function(sub) {
   if (!this.subIds.has(sub.id)) {
     this.subs.push(sub);
@@ -14,7 +15,7 @@ Dep.prototype.addSub = function(sub) {
 }
 
 Dep.prototype.depend = function() {
-  if (Dep.target) {
+  if (Dep.target) { // 理论来说是Watcher
     Dep.target.addDep(this)
   }
 }

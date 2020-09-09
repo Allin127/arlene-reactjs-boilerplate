@@ -5,13 +5,15 @@ export function observe(data) {
     return;
   }
   for (var key in data) {
-    var dep = new Dep()
-    let val = data[key]
-    observe(val)
+    var dep = new Dep();
+    let val = data[key];
+    observe(val);
     Object.defineProperty(data, key, {
       enumerable: true,
       configurable: true,
       get() {
+        debugger;
+        console.log(Dep.target);
         if (Dep.target) {
           dep.depend()
         }
@@ -21,11 +23,7 @@ export function observe(data) {
         if (val === newVal) return;
         val = newVal
         dep.notify(); // 通知所有订阅者
-      },
-    })
+      }
+    });
   }
 }
-
-// function Observer(key) {
-
-// }

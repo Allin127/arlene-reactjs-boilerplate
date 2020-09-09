@@ -8,8 +8,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   mode: 'production',
-  // entry: ['./src/simple/index','./src/router-sample/index','./src/website-layout/index'],
-  entry: ['./src/miniprogramm/framework'],
+  entry: ['./src/miniprogramm/fmk/index'],
   module: {
     rules: [{
       test: /\.jsx?$/,
@@ -88,10 +87,10 @@ module.exports = {
     }), new webpack.NamedModulesPlugin()],
   output: {
     filename: 'index.js',
-    library: 'snb',
+    library: 'arl',
     libraryTarget: 'umd',
     umdNamedDefine: true,
-    path: path.resolve(__dirname, 'node_modules/snb')
+    path: path.resolve(__dirname, 'node_modules/arl')
   },
   resolve: {
     extensions: ['.web.js', '.js', '.jsx']
