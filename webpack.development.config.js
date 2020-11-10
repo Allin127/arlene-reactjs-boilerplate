@@ -3,6 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const express = require('express');
 
+
 module.exports = {
   mode: 'development',
   //https://webpack.js.org/configuration/dev-server/#devserver
@@ -101,7 +102,8 @@ module.exports = {
   resolve: {
     alias: {
       '@':path.resolve(__dirname, 'src'),
-      'react-dom': '@hot-loader/react-dom'
+      'react-dom': '@hot-loader/react-dom',
+      'MPService':path.resolve(__dirname, 'node_modules/@arl/MPService'),
       // 'ALBase': path.resolve(__dirname, 'node_modules/h5-lib-base/src/index'),
       // 'ALUI-WEB': path.resolve(__dirname, 'node_modules/h5-lib-ui/src/web/index'),
       // 'ALUI-LFE': path.resolve(__dirname, 'node_modules/h5-lib-ui/src/lfe'),

@@ -1,0 +1,15 @@
+var vm = {};
+var setData = function () {
+        var vnode = h("div", [h('button', { on: { click: this.someFn } }, this.num), h("img", {
+                attrs: {
+                        src: require("../assets/lss-small.jpg"),
+                        className: "profile"
+                }
+        }), h("h3", ["text"]), h("h3", ["text2"])]);
+        if (vm._vnode) {
+                patch(vm._vnode, vnode)
+        } else {
+                patch(document.querySelector(vm.$el), vnode)
+        }
+        vm._vnode = vnode
+}

@@ -1,7 +1,7 @@
 import { initMixin } from './init'
 import { stateMixin } from './state'
 import { lifecycleMixin } from './lifecycle'
-import { renderMixin } from './render'
+// import { renderMixin } from './render'
 export function Arl(options) {
     this._init(options);
 }
@@ -9,4 +9,4 @@ export function Arl(options) {
 initMixin(Arl);
 stateMixin(Arl);
 lifecycleMixin(Arl);
-renderMixin(Arl);
+// renderMixin(Arl);

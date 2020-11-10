@@ -1,0 +1,1 @@
+$CORE_CODE; var _c=function(pageId,data){data.task="_c";data.pageId=pageId;const sParams = JSON.stringify(data); window.AndroidBridge.ArleneWebViewDidCallFromJS(sParams);};

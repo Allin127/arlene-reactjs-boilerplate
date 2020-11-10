@@ -6,9 +6,13 @@
   "scripts": {
     "start": "cross-env __IS_WEB__=1 webpack-dev-server --hot --config webpack.development.config.js",
     "build": "cross-env __IS_WEB__=1 webpack --config webpack.production.config.js",
-    "build:common": "cross-env __IS_WEB__=1 webpack --config webpack.production.common.config.js",
+    "build:page": "cross-env __IS_WEB__=1  webpack --config page.webpack.js",
+    "build:service": "cross-env __IS_WEB__=1  webpack --config service.webpack.js",
+    "build:service:na": "cross-env __IS_WEB__=1 __PLATFORM__=NA  webpack --config service.webpack.js&npm run cp:service",
+    "build:common": "npm run build:page&&npm run build:service",
     "build:test": "cross-env __IS_WEB__=1 webpack --config webpack.production.test.config.js",
-    "sync": "rsync -avP --exclude-from='rsync-exclude.list' /Users/fengc16/workspace/arlene/arleneH5/arlene-pfe ./"
+    "sync": "rsync -avP --exclude-from='rsync-exclude.list' /Users/fengc16/workspace/arlene/arleneH5/arlene-pfe ./",
+    "cp:service": "cp -R ./node_modules/@arl/MPService/*.js /Users/fengc16/workspace/arlene/arleneiOS/ArleneiOS/assets/@arl/MPService"
   },
   "repository": {
     "type": "git",
@@ -29,9 +33,13 @@
     "dargs": "^6.0.0",
     "events": "^3.1.0",
     "express": "^4.16.3",
+    "fs-extra": "^9.0.1",
     "gitclone": "^2.0.0",
+    "http-proxy-agent": "^4.0.1",
+    "https-proxy-agent": "^5.0.0",
     "inquirer": "^6.0.0",
     "lodash": "^4.17.10",
+    "node-fetch": "^2.6.1",
     "normalize.css": "^8.0.0",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.13.5",

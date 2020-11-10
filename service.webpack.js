@@ -1,17 +1,24 @@
+//打包Service.js
 const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { readFileSync,outputFileSync } = require('fs-extra');
 
+var extensions;
+if (process.env.__PLATFORM__=='NA') {
+  extensions = ['.na.js','.web.js', '.js', '.jsx'];
+}else{
+  extensions = ['.web.js', '.js', '.jsx'];
+}
 
 module.exports = {
   mode: 'production',
-  entry: ['./src/miniprogramm/fmk/index'],
+  entry: ['./src/miniprogramm/fmk/mp-service-js-framework'],
   module: {
     rules: [{
-      test: /\.jsx?$/,
+      test: /\.js?$/,
       use: [{
         loader: 'babel-loader',
         options: {
@@ -29,9 +36,11 @@ module.exports = {
             "@babel/preset-react"
           ],
           "plugins":
-            ["react-hot-loader/babel",
+            [
               ['@babel/plugin-proposal-decorators', { legacy: true }],
-              ["@babel/plugin-proposal-class-properties", { loose: true }]]
+              ["@babel/plugin-proposal-class-properties", { loose: true }],
+              
+            ]
         }
       }],
     },
@@ -74,25 +83,33 @@ module.exports = {
   },
   plugins: [
     // new BundleAnalyzerPlugin(),
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].css'
-    }), new webpack.NamedModulesPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.__IS_WEB__': true
+    new webpack.ProgressPlugin((percentage, message, ...args) => {
+      // e.g. Output each progress message directly to the console:
+      // console.info(percentage, message, ...args);
+      if(percentage==1){
+        setTimeout(function(){
+          let code = readFileSync(path.resolve(__dirname, 'node_modules/@arl/MPService/index_tmp.js'),{ encoding: "utf8" })
+          let resultCode= readFileSync(path.resolve(__dirname, 'src/miniprogramm/fmk/MPCore/tpl/service.tpl.js'),{ encoding: "utf8" }).replace("$CORE_CODE",code);
+          let filePath = path.resolve(__dirname, 'node_modules/@arl/MPService/index.js');
+          outputFileSync(filePath,resultCode);
+        },1000);
+        
+        
+      }
     }),
-    new HtmlWebpackPlugin({
-      template: './template.html',
-      filename: 'index.html'
-    }), new webpack.NamedModulesPlugin()],
+    new CleanWebpackPlugin()
+  ],
   output: {
-    filename: 'index.js',
-    library: 'arl',
-    libraryTarget: 'umd',
+    filename: 'index_tmp.js',
+    libraryTarget: 'global',
     umdNamedDefine: true,
-    path: path.resolve(__dirname, 'node_modules/arl')
+    globalObject:'_$g',
+    path: path.resolve(__dirname, 'node_modules/@arl/MPService')
   },
   resolve: {
-    extensions: ['.web.js', '.js', '.jsx']
+    extensions: extensions
+  },
+  optimization: {
+    minimize: true
   }
 };

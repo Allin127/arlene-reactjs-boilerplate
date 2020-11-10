@@ -1,14 +1,14 @@
+//打包service.js
 const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const { readFileSync,outputFileSync } = require('fs-extra');
 
 module.exports = {
   mode: 'production',
-  // entry: ['./src/simple/index','./src/router-sample/index','./src/website-layout/index'],
-  entry: ['./src/miniprogramm/test'],
+  entry: ['./src/miniprogramm/fmk/mp-page-js-framework'],
   module: {
     rules: [{
       test: /\.jsx?$/,
@@ -73,33 +73,31 @@ module.exports = {
     ]
   },
   plugins: [
-    new BundleAnalyzerPlugin(),
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].css'
-    }), new webpack.NamedModulesPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.__IS_WEB__': true
+    // new BundleAnalyzerPlugin(),
+    new webpack.ProgressPlugin((percentage, message, ...args) => {
+      // e.g. Output each progress message directly to the console:
+      // console.info(percentage, message, ...args);
+      if(percentage==1){
+        setTimeout(function(){
+          let code = readFileSync(path.resolve(__dirname, 'node_modules/@arl/MPPage/index_tmp.js'),{ encoding: "utf8" })
+          let resultCode= readFileSync(path.resolve(__dirname, 'src/miniprogramm/fmk/MPCore/tpl/page.tpl.js'),{ encoding: "utf8" }).replace("$CORE_CODE",code);
+          let filePath = path.resolve(__dirname, 'node_modules/@arl/MPPage/index.js');
+          outputFileSync(filePath,resultCode);
+        },1000);
+        
+        
+      }
     }),
-    new HtmlWebpackPlugin({
-      template: './template.html',
-      filename: 'index.html'
-    })],
+    new CleanWebpackPlugin()
+  ],
   output: {
-    filename: '[name].[hash].js',
-    chunkFilename: '[name].[hash].js',
-    path: path.resolve(__dirname, 'dist')
+    filename: 'index_tmp.js',
+    library: 'MPPage',
+    libraryTarget: 'umd',
+    umdNamedDefine: true,
+    path: path.resolve(__dirname, 'node_modules/@arl/MPPage')
   },
   resolve: {
-    alias: {
-      'MPService':path.resolve(__dirname, 'node_modules/@arl/MPService')
-    },
     extensions: ['.web.js', '.js', '.jsx']
-  },
-  externals:{
-    'MPService':'MPService'
-  },
-  optimization: {
-    minimize: false
   }
 };

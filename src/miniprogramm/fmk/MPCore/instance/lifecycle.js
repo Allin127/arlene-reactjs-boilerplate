@@ -16,9 +16,9 @@ export function mountComponent (vm, el) {
       hasBinding=true;
     }
     // console.log(123);
-      
-    _c("/page/first",vm._data);
-    // const vnode =vm._render();//同目录下的render.js文件中定义
+       
+    // _c("/page/first",vm._data);
+    vm.$options.render.call(vm);//同目录下的render.js文件中定义
     // vm._update(vnode) // 本文件中的_update方法
   }
 
