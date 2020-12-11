@@ -37,12 +37,41 @@
     </style>
     <meta charSet="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0,user-scalable=no" />
+    <script src="./sdk.js"></script>
+    <script src="./visual-tool.js"></script>
+    <!-- <script>
+
+        // 浦发环境
+        window.$hy.init({
+            key: 'e3bb4a1a7b0649e58e0632118382eea9', // 应用密钥
+            apn: 'xatest1', // 应用名称
+            apv: '1.0.0', // 应用版本
+            host: 'mpaastest2.spdb.com.cn/', // 浦发测试 https
+            gwid: 'mbiz' // 网关应用标识
+        })
+
+        window.$hyTool.init({
+            key: 'e3bb4a1a7b0649e58e0632118382eea9', // 应用密钥
+            apn: 'xatest1', // 应用名称
+            apv: '1.0.0', // 应用版本
+            host: 'mpaastest2.spdb.com.cn/', // 浦发测试 https
+            gwid: 'mbiz' // 网关应用标识
+        })
+        window.$hy.setDebug(true);
+        window.$hy.setPin('⽤户标识');
+        window.$hy.setReportURL('https://www.ic.com');
+
+
+
+    </script> -->
+</head>
 
 <body>
     <div id="root" class='flex-container'>
         <div id="app"></div>
     </div>
-    <!-- <script>var mountNode = document.getElementById('root');</script> -->
+    <script>var mountNode = document.getElementById('app');</script>
 </body>
+
 
 </html>
