@@ -126,7 +126,7 @@ export default class Aside extends PureComponent {
                         openKeys={this.state.openKeys}
                         defaultOpenKeys={this.state.openKeys}
                         onOpenChange={this.onOpenChange}
-                        selectedKeys={[this.props?.location?.pathname]}
+                        selectedKeys={[this.props.location.pathname]}
                     >
                         {/* {this.createMenuArr()} */}
                         {this.getNavMenuItems(SubMenuConfig)}

@@ -20,7 +20,8 @@ module.exports = {
       app.use(express.static(path.resolve(process.cwd(), './assets')));
     }
   },
-  entry: ['./src/simple/index','./src/router-sample/index','./src/website-layout/index'],
+  // entry: ['./src/simple/index','./src/router-sample/index','./src/website-layout/index'],
+  entry: ['./src/website-layout/index'],
   // entry: ['./src/website-layout/index'],
   // entry: ['./src/miniprogramm/test'], //mini vue 
   module: {
