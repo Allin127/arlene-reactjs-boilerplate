@@ -25,6 +25,35 @@ var fetch = function (url, params) {
 
 var gDate = "2022-7-13";
 
+var questionFun = function () {
+  var f1 = function () {
+
+
+  }
+
+  var fn = function () {
+    var s = setInterval(f1, 200);
+    return s;
+  }
+
+  var startFun = function () {
+    console.log("启动开始");
+    console.warn((new Date()).toLocaleTimeString());
+    var st;
+    for (var i = 0; i < 1; i++) {
+      st = fn();
+    }
+
+    setTimeout(function () { clearInterval(st) }, 3 * 1000);
+  }
+
+  var ttl = ((new Date(gDate + " 10:59:59")) - (new Date()));
+  console.log("当前时间:" + (new Date()).toLocaleTimeString())
+  console.log("剩余时间" + parseInt(ttl / 1000))
+  setTimeout(startFun, ttl);
+}
+
+
 var cp = function () {
   var f1 = function () {
     /// start 抢
@@ -39,32 +68,15 @@ var cp = function () {
         "sec-fetch-mode": "cors",
         "sec-fetch-site": "same-origin",
         "x-requested-with": "XMLHttpRequest",
-        "cookie": "_icla=957411901.686755715; c__utmc=957411901.686755715; x-s3-sid=S1i1Dwq042Yrm14rzwiyke336; SESSION=01443d4d-f5c8-42d3-b5ac-841390ada874; c__utma=957411901.686755715.1238467299.1648867499.1657675214.2; x-s3-rtk=Td21cp35smm6oldstPCq1GvYi01rHdMcNry42r; c__utmb=957411901.686755715.1657675214.1657676987.5; x-s3-tid=50ed7655d78a19a7bff8829003d4a5db0a80421b:GvYi01_cNry:14fd1c0d-024e-11ed-85f4-1f12d09be721:ae97f50486",
-        "Referer": "https://phwap.spdbph.com/h/page/1238467299/ba3bab14eaf7445485168933535e4bba?token=VFVSQmQwMUJQVDA9dc0dfae4-7c06-465a-a2d9-21c9094967df",
+        "cookie": "_icla=957411901.686755715; c__utmc=957411901.686755715; x-s3-sid=S1i1Dwq042Yrm14rzwiyke336; SESSION=01443d4d-f5c8-42d3-b5ac-841390ada874; c__utma=957411901.686755715.1238467299.1648867499.1657675214.2; x-s3-rtk=Td21cp35smm6oldstPCq1GvYi01rHdMcNry42r; c__utmb=957411901.686755715.1657675214.1657675361.4; x-s3-tid=c1711c49790531f037dd7ddb7cbca6cf920b9e3a:GvYi01_cNry:4c1a70a0-024a-11ed-969a-5954278ba1b9:ae97f50450",
+        "Referer": "https://phwap.spdbph.com/h/page/1238467299/ba3bab14eaf7445485168933535e4bba?token=VFVSQmQwMUJQVDA9bef3475e-1edb-469e-85e7-c4b4b66c61fa",
         "Referrer-Policy": "no-referrer-when-downgrade"
       },
-      "body": "{\"prizeId\":\"MjAyMjA3MTE4NTM5MzY0NXdiMjVOUkRVPQ==\",\"verifyKey\":\"1211a2f831f945c79aa0c35a8f7c61f5\",\"sectionId\":\"section859\",\"token\":\"VFVSQmQwMUJQVDA9dc0dfae4-7c06-465a-a2d9-21c9094967df\",\"source2\":\"2012\",\"source6\":\"0000\",\"source8\":\"0000\",\"source7\":\"ba3bab14eaf7445485168933535e4bba\",\"source5\":\"H5\",\"eveSource\":\"GvYi01_cNry\",\"eveSid\":\"S1i1Dwq042Yrm14rzwiyke336\",\"eveToken\":\"Td21cp35smm6oldstPCq1GvYi01rHdMcNry42r\",\"dvToken\":\"DT_3V6TcZOfXgjut-C0RztOzaSilA2P4N8NsefVNrRo9Z5\",\"device\":\"H5\"}",
+      "body": "{\"prizeId\":\"MjAyMjA3MTE4NTM5MzY0NXdiMjVOUkRVPQ==\",\"verifyKey\":\"5cc9a75e8ab04eb597467b8b0bb9f305\",\"sectionId\":\"section859\",\"token\":\"VFVSQmQwMUJQVDA9bef3475e-1edb-469e-85e7-c4b4b66c61fa\",\"source2\":\"2012\",\"source6\":\"0000\",\"source8\":\"0000\",\"source7\":\"ba3bab14eaf7445485168933535e4bba\",\"source5\":\"H5\",\"eveSource\":\"GvYi01_cNry\",\"eveSid\":\"S1i1Dwq042Yrm14rzwiyke336\",\"eveToken\":\"Td21cp35smm6oldstPCq1GvYi01rHdMcNry42r\",\"dvToken\":\"DT_3V6TcZOfXgjut-C0RztOzaSilA2P4N8NsefVNrRo9Z5\",\"device\":\"H5\"}",
       "method": "PUT"
     });
 
-    fetch("https://phwap.spdbph.com/e/extspdbphrt/pgw/equity/receivePhdjCoupon/ba3bab14eaf7445485168933535e4bba", {
-      "headers": {
-        "accept": "application/json, text/javascript, */*; q=0.01",
-        "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
-        "cache-control": "no-cache",
-        "content-type": "application/json;charset=UTF-8",
-        "pragma": "no-cache",
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-origin",
-        "x-requested-with": "XMLHttpRequest",
-        "cookie": "SESSION=e1a5d9d3-65c0-4e27-8396-3a9c73e721eb; _icla=957411901.587407035; c__utmb=957411901.587407035.1657677110.1657677110.1; c__utma=957411901.587407035.1238467299.1657677110.1657677110.1; c__utmc=957411901.587407035; x-s3-sid=S1m4Aeumttd4q14r21cp35sz4; x-s3-rtk=Tl21cp35s25WTumttCjq1GvYi01rFS5cNry42i; x-s3-tid=0b4186c2502065da02e9729f030417e22025f503:GvYi01_cNry:5dc0bb54-024e-11ed-969a-5954278ba1b9:ae97f504fb",
-        "Referer": "https://phwap.spdbph.com/h/page/1238467299/ba3bab14eaf7445485168933535e4bba?token=VFVSQmQwMUJQVDA9d83973c4-5705-48d4-b92a-19791e5fc5c9",
-        "Referrer-Policy": "no-referrer-when-downgrade"
-      },
-      "body": "{\"prizeId\":\"MjAyMjA3MTE4NTM5MzY0NXdiMjVOUkRVPQ==\",\"verifyKey\":\"70c1c3194e5a42f1a2425589d2dfbcb8\",\"sectionId\":\"section859\",\"token\":\"VFVSQmQwMUJQVDA9d83973c4-5705-48d4-b92a-19791e5fc5c9\",\"source2\":\"2012\",\"source6\":\"0000\",\"source8\":\"0000\",\"source7\":\"ba3bab14eaf7445485168933535e4bba\",\"source5\":\"H5\",\"eveSource\":\"GvYi01_cNry\",\"eveSid\":\"S1m4Aeumttd4q14r21cp35sz4\",\"eveToken\":\"Tl21cp35s25WTumttCjq1GvYi01rFS5cNry42i\",\"dvToken\":\"DT_wntN-7-63iSQjaZeKrBna-OvTtuBh9mr9HCqcsw3ID0\",\"device\":\"H5\"}",
-      "method": "PUT"
-    });
+
     // fetch("https://huamairj.com/pf_spring_outing/groupKill/share/getTodayGroupInfo", {
     //   "headers": {
     //     "accept": "application/json, text/plain, */*",
@@ -135,5 +147,7 @@ var cp = function () {
 
 // questionFun();
 cp();
+
+
 
 

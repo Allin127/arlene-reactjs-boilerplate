@@ -26,7 +26,6 @@ export default class FlexBoxLayoutSample extends PureComponent {
 
     constructor(props) {
         super(props);
-
         this.eventEmitter = new EventEmitter();
         
         this.eventEmitter.on('css-collect-callback',(cssJson,className)=>{
